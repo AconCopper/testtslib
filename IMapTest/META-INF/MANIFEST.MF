@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Ts4-list
-Bundle-SymbolicName: ts4-list
+Bundle-Name: IMapTest
+Bundle-SymbolicName: IMapTest
 Bundle-Version: 1.0.0.qualifier
-Automatic-Module-Name: ts4.list
+Automatic-Module-Name: IMapTest
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.toxsoft.core.tslib;bundle-version="1.0.0"
