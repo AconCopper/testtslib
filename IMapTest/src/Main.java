@@ -30,11 +30,10 @@ public class Main {
 				 sqrSumm += i*i;
 			}
 			double fin = Math.sqrt(sqrSumm);
-			p("%s=(",String.valueOf(fin));
+			p("%s=sqrt(",String.valueOf(fin));
 			
 //			Iterator<String> iter = map.keys().iterator();
 //			if(iter.hasNext()) {
-//				p("sdf");
 //				p("%s^2+",iter.toString()));
 //			}else {
 //				p("%s^2)",iter.toString());
