@@ -13,11 +13,14 @@ import org.toxsoft.core.tslib.coll.IMap;
 import org.toxsoft.core.tslib.coll.IMapEdit;
 import org.toxsoft.core.tslib.coll.impl.ElemArrayList;
 import org.toxsoft.core.tslib.coll.impl.ElemMap;
+import org.toxsoft.core.tslib.coll.primtypes.IStringMap;
+import org.toxsoft.core.tslib.coll.primtypes.IStringMapEdit;
+import org.toxsoft.core.tslib.coll.primtypes.impl.StringMap;
 
 public class Main {
 	
 	public static void main(String[] args) {
-		IMapEdit<String, Integer> map = new ElemMap<>();
+		IStringMapEdit<Integer> map = new StringMap();
 		boolean notYet = true;
 		while (notYet) {
 			map.put(waitEnter("Enter var name\n"), Integer.parseInt(waitEnter("Enter ver value\n")));		
@@ -30,14 +33,7 @@ public class Main {
 				 sqrSumm += i*i;
 			}
 			double fin = Math.sqrt(sqrSumm);
-			p("%s=sqrt(",String.valueOf(fin));
-			
-//			Iterator<String> iter = map.keys().iterator();
-//			if(iter.hasNext()) {
-//				p("%s^2+",iter.toString()));
-//			}else {
-//				p("%s^2)",iter.toString());
-//			}
+			p("%.2f=sqrt(", Double.parseDouble(String.valueOf(fin)));
 			for (String str : map.keys()) {
 				if(str != map.keys().last()) {
 					p("%s^2+", str);	
