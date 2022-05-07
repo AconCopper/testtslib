@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ttt
+Bundle-SymbolicName: ttt
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: ttt
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Require-Bundle: org.toxsoft.core.tslib;bundle-version="1.0.0"
