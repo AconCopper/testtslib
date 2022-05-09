@@ -17,10 +17,53 @@ public class TTTEngine {
     return GameMap;
   }
 
+  private boolean checkDraw() {
+    return false;
+  }
+
+  private boolean checkWin( ETttCell sign ) {
+    // Vertical
+    for( int i = 0; i < 3; i++ ) {
+      if( sign == GameMap.findByKey( i + 0 ) && sign == GameMap.findByKey( i + 3 )
+          && sign == GameMap.findByKey( i + 6 ) ) {
+        return true;
+      }
+    }
+    // Horizontal
+    for( int i = 0; i < 3; i++ ) {
+      if( sign == GameMap.findByKey( 0 + i * 3 ) && sign == GameMap.findByKey( 1 + i * 3 )
+          && sign == GameMap.findByKey( 2 + i * 3 ) ) {
+        return true;
+      }
+    }
+    // Diagonal
+    if( sign == GameMap.findByKey( 2 ) && sign == GameMap.findByKey( 4 ) && sign == GameMap.findByKey( 6 ) ) {
+      return true;
+    }
+    if( sign == GameMap.findByKey( 0 ) && sign == GameMap.findByKey( 4 ) && sign == GameMap.findByKey( 8 ) ) {
+      return true;
+    }
+    return false;
+
+  }
+
   public EGameState gameState() {
     // TODO
-
-    return GameState;
+    if( checkWin( ETttCell.X_SIGN ) ) {
+      GameState = EGameState.X_WIN;
+      return GameState;
+    }
+    if( checkWin( ETttCell.O_SIGN ) ) {
+      GameState = EGameState.O_WIN;
+      return GameState;
+    }
+    if( checkDraw() == true ) {
+      GameState = EGameState.DRAW;
+      return GameState;
+    }
+    else {
+      return GameState;
+    }
   }
 
   public void newGame() {
