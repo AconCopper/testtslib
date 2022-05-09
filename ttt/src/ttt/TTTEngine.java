@@ -1,6 +1,6 @@
 package ttt;
 
-import static org.toxsoft.core.tslib.utils.TsTestUtils.p;
+import static org.toxsoft.core.tslib.utils.TsTestUtils.pl;
 
 import org.toxsoft.core.tslib.coll.primtypes.IIntMapEdit;
 import org.toxsoft.core.tslib.coll.primtypes.impl.IntMap;
@@ -12,6 +12,12 @@ public class TTTEngine {
   String                OWONTEXT  = "O won the game!";
   IIntMapEdit<ETttCell> GameMap   = new IntMap<ETttCell>( 9 );
   EGameState            GameState = EGameState.X_MOVE;
+
+  public TTTEngine() {
+    for( int i = 0; i < 9; i++ ) {
+      GameMap.put( i, ETttCell.EMPTY );
+    }
+  }
 
   public IIntMapEdit<ETttCell> cellState() {
     return GameMap;
@@ -75,14 +81,23 @@ public class TTTEngine {
     switch( GameState ) {
       case X_MOVE:
         GameMap.put( ChangedCell, ETttCell.X_SIGN );
+        GameState = EGameState.O_MOVE;
+        GameState = gameState();
+        break;
       case O_MOVE:
         GameMap.put( ChangedCell, ETttCell.O_SIGN );
+        GameState = EGameState.X_MOVE;
+        GameState = gameState();
+        break;
       case DRAW:
-        p( DRAWTEXT );
+        pl( DRAWTEXT );
+        break;
       case X_WIN:
-        p( XWONTEXT );
+        pl( XWONTEXT );
+        break;
       case O_WIN:
-        p( OWONTEXT );
+        pl( OWONTEXT );
+        break;
     }
   }
 }
