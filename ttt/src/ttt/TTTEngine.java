@@ -5,21 +5,27 @@ import static org.toxsoft.core.tslib.utils.TsTestUtils.pl;
 import org.toxsoft.core.tslib.coll.primtypes.IIntMapEdit;
 import org.toxsoft.core.tslib.coll.primtypes.impl.IntMap;
 
-public class TTTEngine {
+public class TTTEngine
+    implements ITttEngine {
 
-  String                DRAWTEXT  = "Draw!";
-  String                XWONTEXT  = "X won the game!";
-  String                OWONTEXT  = "O won the game!";
-  IIntMapEdit<ETttCell> GameMap   = new IntMap<ETttCell>( 9 );
-  EGameState            GameState = EGameState.X_MOVE;
+  String                     DRAWTEXT  = "Draw!";
+  String                     XWONTEXT  = "X won the game!";
+  String                     OWONTEXT  = "O won the game!";
+  IIntMapEdit<ETttCellState> GameMap   = new IntMap<ETttCellState>( 9 );
+  EGameState                 GameState = EGameState.X_MOVE;
 
   public TTTEngine() {
     for( int i = 0; i < 9; i++ ) {
-      GameMap.put( i, ETttCell.EMPTY );
+      GameMap.put( i, ETttCellState.EMPTY );
     }
   }
 
-  public IIntMapEdit<ETttCell> cellState() {
+  public EGameState getGameState() {
+    return GameState;
+  }
+
+  @Override
+  public IIntMapEdit<ETttCellState> getGameMap() {
     return GameMap;
   }
 
@@ -27,7 +33,7 @@ public class TTTEngine {
     return false;
   }
 
-  private boolean checkWin( ETttCell sign ) {
+  private boolean checkWin( ETttCellState sign ) {
     // Vertical
     for( int i = 0; i < 3; i++ ) {
       if( sign == GameMap.findByKey( i + 0 ) && sign == GameMap.findByKey( i + 3 )
@@ -53,13 +59,14 @@ public class TTTEngine {
 
   }
 
+  @Override
   public EGameState gameState() {
     // TODO
-    if( checkWin( ETttCell.X_SIGN ) ) {
+    if( checkWin( ETttCellState.X_SIGN ) ) {
       GameState = EGameState.X_WIN;
       return GameState;
     }
-    if( checkWin( ETttCell.O_SIGN ) ) {
+    if( checkWin( ETttCellState.O_SIGN ) ) {
       GameState = EGameState.O_WIN;
       return GameState;
     }
@@ -72,20 +79,22 @@ public class TTTEngine {
     }
   }
 
+  @Override
   public void newGame() {
     GameMap.clear();
     GameState = EGameState.X_MOVE;
   }
 
+  @Override
   public void makeAMove( int ChangedCell ) {
     switch( GameState ) {
       case X_MOVE:
-        GameMap.put( ChangedCell, ETttCell.X_SIGN );
+        GameMap.put( ChangedCell, ETttCellState.X_SIGN );
         GameState = EGameState.O_MOVE;
         GameState = gameState();
         break;
       case O_MOVE:
-        GameMap.put( ChangedCell, ETttCell.O_SIGN );
+        GameMap.put( ChangedCell, ETttCellState.O_SIGN );
         GameState = EGameState.X_MOVE;
         GameState = gameState();
         break;

@@ -1,6 +1,6 @@
 package ttt;
 
-public enum ETttCell {
+public enum ETttCellState {
   EMPTY,
   X_SIGN,
   O_SIGN
