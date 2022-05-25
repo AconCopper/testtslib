@@ -14,4 +14,6 @@ public interface ITttEngine {
 
   public EGameState getGameState();
 
+  public String getCellSign( int cell );
+
 }

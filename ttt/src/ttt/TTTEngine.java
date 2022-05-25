@@ -20,6 +20,25 @@ public class TTTEngine
     }
   }
 
+  @Override
+  public String getCellSign( int cell ) {
+    ETttCellState cellstate = GameMap.getByKey( cell );
+    switch( cellstate ) {
+      case EMPTY: {
+        return "-";
+      }
+      case O_SIGN: {
+        return "O";
+      }
+      case X_SIGN: {
+        return "X";
+      }
+      default:
+        throw new IllegalArgumentException( "Unexpected value: " + cellstate );
+    }
+  }
+
+  @Override
   public EGameState getGameState() {
     return GameState;
   }
