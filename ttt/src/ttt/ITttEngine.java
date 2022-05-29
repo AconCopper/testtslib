@@ -1,5 +1,6 @@
 package ttt;
 
+import org.toxsoft.core.tslib.bricks.events.change.IGenericChangeListener;
 import org.toxsoft.core.tslib.coll.primtypes.IIntMapEdit;
 
 public interface ITttEngine {
@@ -15,5 +16,7 @@ public interface ITttEngine {
   public EGameState getGameState();
 
   public String getCellSign( int cell );
+
+  void addListener( IGenericChangeListener aListener );
 
 }

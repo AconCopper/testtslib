@@ -2,27 +2,44 @@ package ttt;
 
 import static org.toxsoft.core.tslib.utils.TsTestUtils.pl;
 
+import org.toxsoft.core.tslib.bricks.events.change.IGenericChangeListener;
+import org.toxsoft.core.tslib.coll.IListEdit;
+import org.toxsoft.core.tslib.coll.impl.ElemArrayList;
 import org.toxsoft.core.tslib.coll.primtypes.IIntMapEdit;
 import org.toxsoft.core.tslib.coll.primtypes.impl.IntMap;
 
 public class TTTEngine
     implements ITttEngine {
 
-  String                     DRAWTEXT  = "Draw!";
-  String                     XWONTEXT  = "X won the game!";
-  String                     OWONTEXT  = "O won the game!";
-  IIntMapEdit<ETttCellState> GameMap   = new IntMap<ETttCellState>( 9 );
-  EGameState                 GameState = EGameState.X_MOVE;
+  String                            DRAWTEXT      = "Draw!";
+  String                            XWONTEXT      = "X won the game!";
+  String                            OWONTEXT      = "O won the game!";
+  IIntMapEdit<ETttCellState>        gameMap       = new IntMap<ETttCellState>();
+  EGameState                        gameState     = EGameState.X_MOVE;
+  IListEdit<IGenericChangeListener> listenersList = new ElemArrayList<IGenericChangeListener>();
 
   public TTTEngine() {
     for( int i = 0; i < 9; i++ ) {
-      GameMap.put( i, ETttCellState.EMPTY );
+      gameMap.put( i, ETttCellState.EMPTY );
+    }
+  }
+
+  // TODO label
+  // TODO добавить перспективу с калькулятором. Как переключать перспективу
+  private void fireEvent() {
+    for( IGenericChangeListener igcl : listenersList ) {
+      igcl.onGenericChangeEvent( igcl );
     }
   }
 
   @Override
+  public void addListener( IGenericChangeListener aListener ) {
+    listenersList.add( aListener );
+  }
+
+  @Override
   public String getCellSign( int cell ) {
-    ETttCellState cellstate = GameMap.getByKey( cell );
+    ETttCellState cellstate = gameMap.getByKey( cell );
     switch( cellstate ) {
       case EMPTY: {
         return "-";
@@ -40,12 +57,12 @@ public class TTTEngine
 
   @Override
   public EGameState getGameState() {
-    return GameState;
+    return gameState;
   }
 
   @Override
   public IIntMapEdit<ETttCellState> getGameMap() {
-    return GameMap;
+    return gameMap;
   }
 
   private boolean checkDraw() {
@@ -55,23 +72,23 @@ public class TTTEngine
   private boolean checkWin( ETttCellState sign ) {
     // Vertical
     for( int i = 0; i < 3; i++ ) {
-      if( sign == GameMap.findByKey( i + 0 ) && sign == GameMap.findByKey( i + 3 )
-          && sign == GameMap.findByKey( i + 6 ) ) {
+      if( sign == gameMap.findByKey( i + 0 ) && sign == gameMap.findByKey( i + 3 )
+          && sign == gameMap.findByKey( i + 6 ) ) {
         return true;
       }
     }
     // Horizontal
     for( int i = 0; i < 3; i++ ) {
-      if( sign == GameMap.findByKey( 0 + i * 3 ) && sign == GameMap.findByKey( 1 + i * 3 )
-          && sign == GameMap.findByKey( 2 + i * 3 ) ) {
+      if( sign == gameMap.findByKey( 0 + i * 3 ) && sign == gameMap.findByKey( 1 + i * 3 )
+          && sign == gameMap.findByKey( 2 + i * 3 ) ) {
         return true;
       }
     }
     // Diagonal
-    if( sign == GameMap.findByKey( 2 ) && sign == GameMap.findByKey( 4 ) && sign == GameMap.findByKey( 6 ) ) {
+    if( sign == gameMap.findByKey( 2 ) && sign == gameMap.findByKey( 4 ) && sign == gameMap.findByKey( 6 ) ) {
       return true;
     }
-    if( sign == GameMap.findByKey( 0 ) && sign == GameMap.findByKey( 4 ) && sign == GameMap.findByKey( 8 ) ) {
+    if( sign == gameMap.findByKey( 0 ) && sign == gameMap.findByKey( 4 ) && sign == gameMap.findByKey( 8 ) ) {
       return true;
     }
     return false;
@@ -80,42 +97,49 @@ public class TTTEngine
 
   @Override
   public EGameState gameState() {
-    // TODO
     if( checkWin( ETttCellState.X_SIGN ) ) {
-      GameState = EGameState.X_WIN;
-      return GameState;
+      gameState = EGameState.X_WIN;
+      fireEvent();
+      return gameState;
     }
     if( checkWin( ETttCellState.O_SIGN ) ) {
-      GameState = EGameState.O_WIN;
-      return GameState;
+      gameState = EGameState.O_WIN;
+      fireEvent();
+      return gameState;
     }
     if( checkDraw() == true ) {
-      GameState = EGameState.DRAW;
-      return GameState;
+      gameState = EGameState.DRAW;
+      fireEvent();
+      return gameState;
     }
     else {
-      return GameState;
+      fireEvent();
+      return gameState;
     }
   }
 
   @Override
   public void newGame() {
-    GameMap.clear();
-    GameState = EGameState.X_MOVE;
+    for( int i = 0; i < 9; i++ ) {
+      gameMap.put( i, ETttCellState.EMPTY );
+    }
+    gameState = EGameState.X_MOVE;
+    fireEvent();
+
   }
 
   @Override
   public void makeAMove( int ChangedCell ) {
-    switch( GameState ) {
+    switch( gameState ) {
       case X_MOVE:
-        GameMap.put( ChangedCell, ETttCellState.X_SIGN );
-        GameState = EGameState.O_MOVE;
-        GameState = gameState();
+        gameMap.put( ChangedCell, ETttCellState.X_SIGN );
+        gameState = EGameState.O_MOVE;
+        gameState = gameState();
         break;
       case O_MOVE:
-        GameMap.put( ChangedCell, ETttCellState.O_SIGN );
-        GameState = EGameState.X_MOVE;
-        GameState = gameState();
+        gameMap.put( ChangedCell, ETttCellState.O_SIGN );
+        gameState = EGameState.X_MOVE;
+        gameState = gameState();
         break;
       case DRAW:
         pl( DRAWTEXT );
@@ -127,5 +151,6 @@ public class TTTEngine
         pl( OWONTEXT );
         break;
     }
+    fireEvent();
   }
 }

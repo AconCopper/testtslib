@@ -15,8 +15,11 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.toxsoft.core.tslib.bricks.events.change.IGenericChangeListener;
 
 import ttt.ITttEngine;
 import ttt.TTTEngine;
@@ -28,6 +31,8 @@ public class SamplePart {
   // TTTEngine engine;
   ITttEngine engine;
   Button     b;
+  Composite  panel;
+  Label      label;
 
   private TableViewer tableViewer;
 
@@ -38,8 +43,21 @@ public class SamplePart {
   public void createComposite( Composite parent ) {
     engine = new TTTEngine();
     parent.setLayout( new GridLayout( 1, false ) );
-    b = new Button( parent, SWT.PUSH );
+    panel = new Composite( parent, 0 );
+    panel.setLayout( new RowLayout( SWT.HORIZONTAL ) );
+    b = new Button( panel, SWT.PUSH );
     b.setText( "Reset game" );
+    label = new Label( panel, 0 );
+    label.setText( engine.getGameState().toString() );
+
+    engine.addListener( new IGenericChangeListener() {
+
+      @Override
+      public void onGenericChangeEvent( Object aSource ) {
+        label.setText( engine.getGameState().toString() );
+      }
+    } );
+
     b.addSelectionListener( new SelectionListener() {
 
       @Override
@@ -52,17 +70,6 @@ public class SamplePart {
         // nop
       }
     } );
-    // TextFactory.newText( SWT.BORDER ) //
-    // .message( "Enter text to mark part as dirty" ) //
-    // .onModify( e -> part.setDirty( true ) ) //
-    // .layoutData( new GridData( GridData.FILL_HORIZONTAL ) )//
-    // .create( parent );
-    //
-    // tableViewer = new TableViewer( parent );
-    // tableViewer.getTable().setHeaderVisible( true );
-    // tableViewer.setContentProvider( ArrayContentProvider.getInstance() );
-    // tableViewer.setInput( createInitialDataModel() );
-    // tableViewer.getTable().setLayoutData( new GridData( GridData.FILL_BOTH ) );
     engine = new TTTEngine();
     tb = new TttBoard( parent, engine );
     tb.setLayoutData( new GridData( GridData.FILL_BOTH ) );
