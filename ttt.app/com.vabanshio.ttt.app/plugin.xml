@@ -12,6 +12,10 @@
                name="applicationCSS"
                value="platform:/plugin/com.vabanshio.ttt.app/css/default.css">
          </property>
+         <property
+               name="appName"
+               value="com.vabanshio.ttt.app">
+         </property>
       </product>
    </extension>
 

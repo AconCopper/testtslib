@@ -10,7 +10,7 @@ import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
-public class PerspectiveSwitch {
+public class SwitchToTtt {
 
   @Inject
   EModelService modelService;
@@ -21,7 +21,7 @@ public class PerspectiveSwitch {
 
   @Execute
   public void execute() {
-    MUIElement element = modelService.find( "com.vabanshio.ttt.app.parts.Calculator", application );
+    MUIElement element = modelService.find( "com.vabanshio.ttt.app.perspective.firstperspective", application );
     MPerspective perspective = modelService.getPerspectiveFor( element );
     partService.switchPerspective( perspective );
   }

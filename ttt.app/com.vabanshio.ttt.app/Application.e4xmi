@@ -10,7 +10,7 @@
         </children>
       </children>
       <children xsi:type="advanced:Perspective" xmi:id="_ObvOsN_vEeyHZ-v6gpMR-w" elementId="com.vabanshio.ttt.app.perspective.secondperspective" label="SecondPerspective">
-        <children xsi:type="basic:Part" xmi:id="_iAZ3cOJ8EeydLa9V8JtTXQ" elementId="com.vabanshio.ttt.app.part.0" contributionURI="bundleclass://com.vabanshio.ttt.app/com.vabanshio.ttt.app.parts.calculator"/>
+        <children xsi:type="basic:Part" xmi:id="_iAZ3cOJ8EeydLa9V8JtTXQ" elementId="com.vabanshio.ttt.app.part.0" contributionURI="bundleclass://com.vabanshio.ttt.app/com.vabanshio.ttt.app.parts.Calculator"/>
       </children>
     </children>
     <mainMenu xmi:id="_6wlLicgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.menu">
@@ -22,7 +22,10 @@
       <children xsi:type="menu:Menu" xmi:id="_6wlLjsgZEeSyMNYR5xypkQ" elementId="help" label="Help">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLj8gZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.handleditem.about" label="About" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
       </children>
-      <children xsi:type="menu:DirectMenuItem" xmi:id="_lpux8OA0EeydLa9V8JtTXQ" elementId="com.vabanshio.ttt.app.directmenuitem.switchperspective" label="SwitchPerspective" contributionURI="bundleclass://com.vabanshio.ttt.app/com.vabanshio.ttt.app.parts.PerspectiveSwitch"/>
+      <children xsi:type="menu:Menu" xmi:id="_-1OkQONZEeyRdqs8_qMpCA" elementId="com.vabanshio.ttt.app.menu.perspectives" label="Perspectives">
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_lpux8OA0EeydLa9V8JtTXQ" elementId="com.vabanshio.ttt.app.directmenuitem.switchperspective" label="Switch to Calculator" contributionURI="bundleclass://com.vabanshio.ttt.app/com.vabanshio.ttt.app.parts.SwitchToCalculator"/>
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_D66rsONaEeyRdqs8_qMpCA" elementId="com.vabanshio.ttt.app.directmenuitem.switchtottt" label="Switch to TTT" contributionURI="bundleclass://com.vabanshio.ttt.app/com.vabanshio.ttt.app.parts.SwitchToTtt"/>
+      </children>
     </mainMenu>
     <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.trimbar.top">
       <children xsi:type="menu:ToolBar" xmi:id="_6wlLlsgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.toolbar">
