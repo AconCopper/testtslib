@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.window.main" label="Eclipse RCP Application" width="500" height="400">
-    <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.partsashcontainer.sample">
-      <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.partstack.sample">
-        <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.part.sample" contributionURI="bundleclass://com.vabanshio.ttt.app/com.vabanshio.ttt.app.parts.SamplePart" iconURI="platform:/plugin/com.vabanshio.ttt.app/icons/home.png" label="Sample Part"/>
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_NOxFQN_vEeyHZ-v6gpMR-w" elementId="com.vabanshio.ttt.app.perspectivestack.0">
+      <children xsi:type="advanced:Perspective" xmi:id="_N_uoIN_vEeyHZ-v6gpMR-w" elementId="com.vabanshio.ttt.app.perspective.firstperspective" label="FirstPerspective">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.partsashcontainer.sample">
+          <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.partstack.sample">
+            <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.part.sample" contributionURI="bundleclass://com.vabanshio.ttt.app/com.vabanshio.ttt.app.parts.SamplePart" label="Sample Part" iconURI="platform:/plugin/com.vabanshio.ttt.app/icons/home.png"/>
+          </children>
+        </children>
+      </children>
+      <children xsi:type="advanced:Perspective" xmi:id="_ObvOsN_vEeyHZ-v6gpMR-w" elementId="com.vabanshio.ttt.app.perspective.secondperspective" label="SecondPerspective">
+        <children xsi:type="basic:Part" xmi:id="_iAZ3cOJ8EeydLa9V8JtTXQ" elementId="com.vabanshio.ttt.app.part.0" contributionURI="bundleclass://com.vabanshio.ttt.app/com.vabanshio.ttt.app.parts.calculator"/>
       </children>
     </children>
     <mainMenu xmi:id="_6wlLicgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.menu">
@@ -15,6 +22,7 @@
       <children xsi:type="menu:Menu" xmi:id="_6wlLjsgZEeSyMNYR5xypkQ" elementId="help" label="Help">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLj8gZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.handleditem.about" label="About" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
       </children>
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_lpux8OA0EeydLa9V8JtTXQ" elementId="com.vabanshio.ttt.app.directmenuitem.switchperspective" label="SwitchPerspective" contributionURI="bundleclass://com.vabanshio.ttt.app/com.vabanshio.ttt.app.parts.PerspectiveSwitch"/>
     </mainMenu>
     <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ" elementId="com.vabanshio.ttt.app.trimbar.top">
       <children xsi:type="menu:ToolBar" xmi:id="_6wlLlsgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.toolbar">

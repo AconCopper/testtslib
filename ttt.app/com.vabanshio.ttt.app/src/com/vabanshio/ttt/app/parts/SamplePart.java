@@ -26,13 +26,12 @@ import ttt.TTTEngine;
 
 public class SamplePart {
 
-  TttBoard tb;
-  // TODO ITttEngine engine = new TTTENginge?
-  // TTTEngine engine;
-  ITttEngine engine;
-  Button     b;
-  Composite  panel;
-  Label      label;
+  TttBoard         tb;
+  final ITttEngine engine = new TTTEngine();
+  Button           b;
+  Composite        panel;
+  Label            label;
+  Button           perspectiveButton;
 
   private TableViewer tableViewer;
 
@@ -41,7 +40,7 @@ public class SamplePart {
 
   @PostConstruct
   public void createComposite( Composite parent ) {
-    engine = new TTTEngine();
+    // engine = new TTTEngine();
     parent.setLayout( new GridLayout( 1, false ) );
     panel = new Composite( parent, 0 );
     panel.setLayout( new RowLayout( SWT.HORIZONTAL ) );
@@ -70,7 +69,6 @@ public class SamplePart {
         // nop
       }
     } );
-    engine = new TTTEngine();
     tb = new TttBoard( parent, engine );
     tb.setLayoutData( new GridData( GridData.FILL_BOTH ) );
   }
