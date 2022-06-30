@@ -4,6 +4,7 @@ import java.io.*;
 
 import org.toxsoft.core.tslib.bricks.strid.coll.*;
 import org.toxsoft.uskat.core.api.sysdescr.dto.*;
+import org.toxsoft.uskat.core.impl.dto.*;
 
 /**
  * {@link IDbDriver} implementation.
@@ -42,12 +43,22 @@ public class DbDriver
 
   @Override
   public IStridablesList<IDtoClassInfo> loadClassInfos() {
+
+    String content = ""; // load from DB
+    IDtoClassInfo dto = DtoClassInfo.KEEPER.str2ent( content );
+
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
   public void writeClassInfos( IStridablesList<IDtoClassInfo> aClassInfos ) {
+    for( IDtoClassInfo dto : aClassInfos ) {
+      String id = dto.id();
+      String content = DtoClassInfo.KEEPER.ent2str( dto );
+
+    }
+
     // TODO Auto-generated method stub
 
   }
