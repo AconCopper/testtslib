@@ -1,5 +1,6 @@
 package org.toxsoft.uskat.backend.sqlite;
 
+import org.toxsoft.core.tslib.bricks.*;
 import org.toxsoft.core.tslib.bricks.strid.*;
 import org.toxsoft.core.tslib.utils.*;
 import org.toxsoft.core.tslib.utils.errors.*;
@@ -13,7 +14,7 @@ import org.toxsoft.uskat.core.backend.api.*;
  */
 public class BslAbstractAddon
     extends BackendAddonBase<BslBackend>
-    implements ICloseable {
+    implements IInitializable, ICloseable {
 
   private final IDbDriver db;
 
@@ -28,6 +29,15 @@ public class BslAbstractAddon
   protected BslAbstractAddon( BslBackend aOwner, IDbDriver aDb, IStridable aInfo ) {
     super( aOwner, aInfo );
     db = TsNullArgumentRtException.checkNull( aDb );
+  }
+
+  // ------------------------------------------------------------------------------------
+  // IInitializable
+  //
+
+  @Override
+  public void initialize() {
+    // nop
   }
 
   // ------------------------------------------------------------------------------------

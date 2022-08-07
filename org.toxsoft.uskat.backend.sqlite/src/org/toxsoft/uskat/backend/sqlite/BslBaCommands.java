@@ -66,7 +66,7 @@ class BslBaCommands
   }
 
   @Override
-  public ITimedList<IDtoCompletedCommand> queryCommands( IQueryInterval aInterval, IGwidList aNeededGwids ) {
+  public ITimedList<IDtoCompletedCommand> queryObjCommands( IQueryInterval aInterval, Gwid aGwid ) {
     // TODO Auto-generated method stub
     return null;
   }

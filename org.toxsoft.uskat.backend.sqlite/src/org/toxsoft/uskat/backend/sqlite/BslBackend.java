@@ -46,6 +46,7 @@ public class BslBackend
   private final BslBaLinks    baLinks;
   private final BslBaObjects  baObjects;
   private final BslBaRtdata   baRtdata;
+  private final BslBaQueries  baQueries;
 
   /**
    * Constructor.
@@ -80,6 +81,8 @@ public class BslBackend
     allAddons.put( baEvents.id(), baEvents );
     baRtdata = new BslBaRtdata( this, db );
     allAddons.put( baRtdata.id(), baRtdata );
+    baQueries = new BslBaQueries( this, db );
+    allAddons.put( baQueries.id(), baQueries );
     baCommands = new BslBaCommands( this, db );
     allAddons.put( baCommands.id(), baCommands );
   }
@@ -95,6 +98,13 @@ public class BslBackend
    */
   ITsContextRo argContext() {
     return argContext;
+  }
+
+  @Override
+  public void initialize() {
+    for( int i = allAddons.size() - 1; i >= 0; i-- ) {
+      allAddons.values().get( i ).initialize();
+    }
   }
 
   // ------------------------------------------------------------------------------------
@@ -162,6 +172,11 @@ public class BslBackend
   @Override
   public IBaRtdata baRtdata() {
     return baRtdata;
+  }
+
+  @Override
+  public IBaQueries baQueries() {
+    return baQueries;
   }
 
   @Override
